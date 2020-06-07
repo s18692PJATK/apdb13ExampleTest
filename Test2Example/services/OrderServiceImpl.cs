@@ -48,10 +48,12 @@ namespace Test2Example.services
                 newOrder.Conf_Orders = conf_orders;
                 _context.Orders.Add(newOrder);
                 _context.SaveChanges();
+                transaction.Commit();
                 return true;
             }
             catch (Exception)
             {
+                transaction.Rollback();
                 return false;
             }
         }
